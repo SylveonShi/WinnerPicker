@@ -55,7 +55,7 @@ public class WinnerPicker {
      * This method read in the data in the Names.csv and get the list of the participants
      */
     public void readData() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/Names.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("Names.csv"))) {
             contestors = reader.readLine();
             list = contestors.split(",");
         } catch (IOException e) {
@@ -98,7 +98,7 @@ public class WinnerPicker {
             }
         }
         try {
-            Thread.sleep(10); // 3000 milliseconds = 3 seconds
+            Thread.sleep(10); // 10 milliseconds = 0.01 second
         } catch (InterruptedException e) {
             System.out.println("Sleep was interrupted: " + e.getMessage());
         }
@@ -106,13 +106,13 @@ public class WinnerPicker {
     }
 
     /**
-     * This method "clear" the console by printing 50 new lines to keep the console clear when
-     * generating result of a new pick.
+     * This method clears a console by printing an escape sequence (ESC is 33 in octal, 0x1b in hexadecimal)
+     * By doing this, the terminal output is more smooth.
+     *
+     * This behaviour is supported by all terminals (JetBrains' too)
      */
     public static void clearConsole() {
-        for (int i = 0; i < 50; i++) {
-            System.out.println();
-        }
+        System.out.print("\033c");
     }
 
     /**
